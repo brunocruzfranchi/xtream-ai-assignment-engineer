@@ -7,3 +7,5 @@ scikit-learn
 ipykernel
 fastapi
 uvicorn
+python-dotenv
+PyYAML
