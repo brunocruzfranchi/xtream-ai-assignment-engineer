@@ -114,3 +114,66 @@ To run the training pipeline you can use the following command:
 ```bash
 python challenge_2/train.py --dataset datasets/diamonds/diamonds.csv
 ```
+
+### Run REST API (Challenge 3)
+
+To run the REST API we have 2 options. The first one is to run the API locally and the second one is to run the API using docker.
+
+#### Environment variables
+Before running the API you need to set the environment variables. You can do this by creating a `.env` file inside the `challenge_3` folder with the following content:
+
+```bash
+#Path where the model is saved
+MODEL_PATH = '/app/model/my_model.json'
+
+#Level of logging
+PROD=INFO
+
+#Port to run the API
+PORT=8080
+```
+
+#### Local
+Assuming that we are using the same environment created in the first step and that .env file was created, you can run the following command to start the API:
+
+```bash
+python challenge_3/app/main.py
+```
+
+#### Docker
+To run the API using docker you need to build the image and run the container. You can do this by running the following commands:
+
+```bash
+docker compose build --up -d
+```
+
+This command is going to allow you to run the API in a container.
+
+In this case, the `MODEL_PATH` should be set to `/app/model/my_model.json` because the model is going to be saved inside the container.
+
+
+#### Testing the API
+
+This API has a single endpoint that can be used to make predictions. The endpoint `/price` is a POST request that receives a JSON with the diamond features and returns the predicted price.
+
+You can test the API by running the following command:
+
+```bash
+curl -X 'POST' \
+  'http://localhost:8080/price' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "carat": 1.5,
+  "cut": "Ideal",
+  "color": "H",
+  "clarity": "SI2",
+  "depth": 62.0,
+  "table": 55.0,
+  "x": 6.63,
+  "y": 6.65,
+  "z": 4.10
+}'
+```
+
+### Cloud infrastructure (Challenge 4)
