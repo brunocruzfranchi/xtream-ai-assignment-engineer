@@ -181,4 +181,5 @@ def return_price_prediction(
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, port=8000)
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run(app, port=port)
