@@ -82,4 +82,35 @@ So, ready to add some sparkle to this challenge? Let's make these diamonds shine
 ---
 
 ## How to run
-Please fill this section as part of the assignment.
+
+### Install dependencies
+First you need to create a new virtual environment and install the dependencies. You can do this by running the following commands with conda:
+
+```bash
+conda create -n env_name python=3.11
+conda activate env_name
+pip install -r requirements.txt
+```
+
+This env will be used to run all the code in this repository.
+
+### Run training pipeline (Challenge 2)
+
+The training pipeline has multiple arguments that can be passed to it. You can see all the arguments by running the following command:
+
+```bash
+python challenge_2/train.py --help
+```
+
+This will display the information needed to run the training pipeline. 
+
+* `--dataset` - Path to the dataset file 
+* `--output` - Path to export the trained model
+* `--test_size` - Size of the test set (default=0.3)
+* `--seed` - Random seed to be used in multiple functions (default=42)
+
+To run the training pipeline you can use the following command:
+
+```bash
+python challenge_2/train.py --dataset datasets/diamonds/diamonds.csv
+```
