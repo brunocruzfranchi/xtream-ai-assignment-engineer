@@ -6,14 +6,15 @@ import xgboost as xgb
 from sklearn.metrics import mean_squared_error
 
 DEFAULT_MODEL_PARAM = {
-    "learning_rate": 0.04595961020010484,
-    "n_estimators": 181,
-    "max_depth": 5,
+    "learning_rate": 0.15166447754858478,
+    "n_estimators": 110,
+    "max_depth": 4,
     "min_child_weight": 10,
-    "colsample_bytree": 1.0,
+    "colsample_bytree": 0.65,
     "subsample": 0.9,
     "gamma": 0,
-    "reg_lambda": 0.1,
+    "reg_lambda": 1.05,
+    "eval_metric": "rmse",
 }
 
 
