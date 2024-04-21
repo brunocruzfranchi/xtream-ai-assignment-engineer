@@ -16,6 +16,20 @@ DEFAULT_PARAMETERS = [
     "z",
 ]
 
+DEFAULT_PARAMETERS_ORDER = [
+    "carat",
+    "depth",
+    "table",
+    "x",
+    "y",
+    "z",
+    "cut_category",
+    "color_category",
+    "clarity_category",
+    "z_depth",
+    "table_width",
+]
+
 
 def check_dataset(dataset: pd.DataFrame) -> pd.DataFrame:
     """Checks the given dataset for missing columns and adds them with default value 0 if necessary.
@@ -80,9 +94,9 @@ def preprocess_dataset(dataset: pd.DataFrame) -> pd.DataFrame:
     cut_mapping = {
         "Fair": 1,
         "Good": 2,
-        "Ideal": 3,
-        "Very Good": 4,
-        "Premium": 5,
+        "Very Good": 3,
+        "Premium": 4,
+        "Ideal": 5,
     }
     filter_dataset["cut_category"] = filter_dataset["cut"].map(cut_mapping)
 
@@ -105,7 +119,6 @@ def preprocess_dataset(dataset: pd.DataFrame) -> pd.DataFrame:
         "I2",
         "I3",
     ][::-1]
-
     clarity_mapping = {k: v for v, k in enumerate(clarity_grading_scale, 1)}
 
     filter_dataset["clarity_category"] = filter_dataset["clarity"].map(
@@ -115,6 +128,8 @@ def preprocess_dataset(dataset: pd.DataFrame) -> pd.DataFrame:
     final_dataset = filter_dataset.drop(columns=["cut", "color", "clarity"])
 
     X = final_dataset.drop(columns=["price"])
+    X = X[DEFAULT_PARAMETERS_ORDER]
+
     y = final_dataset["price"]
 
     return X, y
