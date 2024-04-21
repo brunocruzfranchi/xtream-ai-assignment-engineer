@@ -77,6 +77,41 @@ def preprocess_dataset(dataset: pd.DataFrame) -> pd.DataFrame:
     except:
         filter_dataset["table_width"] = 0
 
+    cut_mapping = {
+        "Fair": 1,
+        "Good": 2,
+        "Ideal": 3,
+        "Very Good": 4,
+        "Premium": 5,
+    }
+    filter_dataset["cut_category"] = filter_dataset["cut"].map(cut_mapping)
+
+    color_grading_scale = list(map(chr, range(ord("D"), ord("Z") + 1)))[::-1]
+    color_mapping = {k: v for v, k in enumerate(color_grading_scale, 1)}
+    filter_dataset["color_category"] = filter_dataset["color"].map(
+        color_mapping
+    )
+
+    clarity_grading_scale = [
+        "FL",
+        "IF",
+        "VVS1",
+        "VVS2",
+        "VS1",
+        "VS2",
+        "SI1",
+        "SI2",
+        "I1",
+        "I2",
+        "I3",
+    ][::-1]
+
+    clarity_mapping = {k: v for v, k in enumerate(clarity_grading_scale, 1)}
+
+    filter_dataset["clarity_category"] = filter_dataset["clarity"].map(
+        clarity_mapping
+    )
+
     final_dataset = filter_dataset.drop(columns=["cut", "color", "clarity"])
 
     X = final_dataset.drop(columns=["price"])
