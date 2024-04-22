@@ -143,6 +143,7 @@ async def docs_redirect():
     return RedirectResponse(url="/docs")
 
 
+# TODO: Develop Unitest for this endpoint
 @app.post(
     "/price",
     summary="Return the price prediction of a diamond based on its features",
