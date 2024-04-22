@@ -177,3 +177,11 @@ curl -X 'POST' \
 ```
 
 ### Cloud infrastructure (Challenge 4)
+
+The architecture for deploying this regression model will be centralized in the use of Amazon AWS tools. In this case, we will use Amazon API Gateway to manage the processing of API calls. This service is optimal because as it will allow us to manage traffic, access and perform continuous monitoring of the API.
+
+The second service that we would need to use in this architecture would be Lambda Function as it allows us to connect to the service to be consumed, i.e. the Docker container of the API that performs the prediction of the price of diamonds. It should be clarified that such Docker image should be created and instantiated in Amazon Elastic Container Registry in order to use it.
+
+![AWS Architecture](/challenge_4/CloudXtream.png)
+
+A simplified version of this architecture could be a simple Lambda Function responsible for performing the inference of the trained model, in which case the model could be stored in S3 and then accessed by a script similar to the one developed in Challenge 3.
